@@ -1,0 +1,20 @@
+.counter {
+  display: flex;
+  gap: 10px;
+}
+
+.imc__form {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn__submit {
+  border-radius: 25px;
+  border: none;
+  color: white;
+  background-color: crimson;
+  width: 10%;
+  height: 40px;
+  cursor: pointer;
+}
