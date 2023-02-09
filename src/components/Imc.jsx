@@ -5,7 +5,10 @@ const Imc = () => {
     height: 0,
     weight: 0,
     name: "",
+    imc: 0,
   });
+
+  const [listImc, setListImc] = useState([]);
 
   const handleChange = ({ target }) => {
     setForm({
@@ -14,10 +17,29 @@ const Imc = () => {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const calculateImc = (
+      parseFloat(form.weight) /
+      (parseFloat(form.height) * parseFloat(form.height))
+    ).toFixed(2);
+
+    const data = {
+      ...form,
+      imc: calculateImc,
+    };
+
+    setListImc([...listImc, data]);
+
+    setForm(data);
+    console.log(form);
+    console.log(listImc);
+  };
+
   return (
     <>
       <h2>Calculadora IMC</h2>
-      <form className="imc__form">
+      <form className="imc__form" onSubmit={handleSubmit}>
         <label>
           Estatura:
           <input
@@ -58,6 +80,27 @@ const Imc = () => {
           Calcular
         </button>
       </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Peso</th>
+            <th>Altura</th>
+            <th>Nombre</th>
+            <th>Imc</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listImc.map((item, index) => (
+            <tr key={index}>
+              <td>{item.weight}</td>
+              <td>{item.height}</td>
+              <td>{item.name}</td>
+              <td>{item.imc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
