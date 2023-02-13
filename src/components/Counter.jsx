@@ -13,11 +13,14 @@ const Counter = () => {
   };
 
   return (
+    <>
+    <h2>Contador</h2>
     <section className="counter">
       <button onClick={handleLess}>-</button>
       <span>{counter}</span>
       <button onClick={handleAdd}>+</button>
     </section>
+    </>
   );
 };
 

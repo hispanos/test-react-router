@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useForm from "../hooks/useForm";
+import { getData, saveData } from "../services/localStorage";
 
 const Imc = () => {
-  const [form, setForm] = useState({
+
+  const [form, handleChange, setForm] = useForm({
     height: 0,
     weight: 0,
     name: "",
     imc: 0,
   });
 
+  const [update, setUpdate] = useState(false);
+
   const [listImc, setListImc] = useState([]);
 
-  const handleChange = ({ target }) => {
-    setForm({
-      ...form,
-      [target.name]: target.value,
-    });
-  };
+  useEffect(() => {
+    console.log('Me estoy ejecutando')
+    const data = getData();
+    setListImc(data);
+  }, [update])
+
+  useEffect(() => {
+    console.log('Hey la vida es bella')
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,11 +37,12 @@ const Imc = () => {
       imc: calculateImc,
     };
 
-    setListImc([...listImc, data]);
+    setUpdate(!update)
+
+    // setListImc([...listImc, data]);
 
     setForm(data);
-    console.log(form);
-    console.log(listImc);
+    saveData(data)
   };
 
   return (

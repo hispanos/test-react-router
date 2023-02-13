@@ -1,13 +1,19 @@
 import React from "react";
-import Counter from "./Counter";
-import Imc from "./Imc";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <h1>holi</h1>
-      <Counter />
-      <Imc />
+      <nav className="menu">
+        <NavLink to='/' className="menu__item">Inicio</NavLink>
+        <NavLink to='imc' className="menu__item">IMC</NavLink>
+        <NavLink to='counter' className="menu__item">Contador</NavLink>
+        <NavLink to='/register' className="menu__item">Registro</NavLink>
+      </nav>
+      <main className="main">
+        <h1>Bienvenido Usuario</h1>
+        <Outlet />
+      </main>
     </>
   );
 };
